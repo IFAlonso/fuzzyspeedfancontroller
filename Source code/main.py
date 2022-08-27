@@ -4,7 +4,7 @@
 ## print built-in function is used along the programme to monitorise the lines on console
 ## script ver 3.1 - 22/07/2022
 ## Created by Ivan Fernandez Alonso
-## The Final Project - Electronics Engineering.
+## Electronics Engineering.
 
 ##  Imports the necessary modules
 
