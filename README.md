@@ -4,3 +4,5 @@ This control system can be implemented on any extractor fan that uses a power in
 Features:
 - The power consumption of the extractor fan can be adapted to the real needs of the situation, which translates directly into an optimization of its energy costs.
 - It has incorporated a digital output (high/low level) to control a light system by means of presence detection.
+
+![PCB_prototype_frontview1](https://user-images.githubusercontent.com/95512993/189371198-46cae23d-2876-4beb-b871-ca7f631f24d3.jpg)
