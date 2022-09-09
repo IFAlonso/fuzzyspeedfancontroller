@@ -2,11 +2,11 @@
 ## Programme for ESP32 microcontroller
 ## File main.py
 ## print built-in function is used along the programme to monitorise the lines on console
-## script ver 3.1 - 22/07/2022
+## script ver 3.4 - 05/08/2022
 ## Created by Ivan Fernandez Alonso
-## Electronics Engineering.
+## The Final Project - Electronics Engineering.
 
-##  Imports the necessary modules
+##  Imports the necessary modules from MicroPython library
 
 import BME280                   # module for temperature and humidity sensor BME280
 ## Note the module BME280 has been modified and only provides integer values with two decimal places
@@ -20,31 +20,30 @@ from machine import PWM
 from machine import SoftI2C     # module for the I2C bus communication
 
 
-
 #  ESP32 - Pin assignments
 
 i2c = SoftI2C(scl=Pin(22), sda=Pin(21))             # object for i2c bus
 detection = Pin(19, Pin.IN)                         # object input pin on GPIO19 for presence sensor
 bme = BME280.BME280(i2c=i2c)                        # object for temp & hum sensor
-pin25 = Pin(25, Pin.OUT)                            # create output pin on GPIO25 for light output
+pin_led = Pin(32, Pin.OUT)                          # create output pin on GPIO32 for light output
 pwm33 = PWM(Pin(33))                                # create PWM object on GPIO33
 pwm33.freq(10000)                                   # set PWM frequency MHz
 pwm33.duty(0)                                       # sets the initial value for PWM duty cycle
 
 
-#  OLED DISPLAY 0.91 inch start
+#  OLED DISPLAY start
 
 oled_width = 128                                            # sets width of the oled display
-oled_height = 64                                            # sets height of the oled display
+oled_height = 32                                            # sets height of the oled display
 oled = ssd1306.SSD1306_I2C(oled_width, oled_height, i2c)
 
 oled.text('ESP32 MCU', 28, 5)
 oled.text('______________________________', 0, 10)
-oled.text('FUZZY LOGIC', 22, 25)
+oled.text('FUZZY LOGIC', 22, 25)                        # only for 64 oled height
 oled.text('SPEED CONTROLLER', 0, 40)
 oled.text('FAN EXTRACTOR', 14, 55)
 oled.show()
-time.sleep(5)
+time.sleep(4)
 oled.fill(0)
 oled.text('Waiting for', 20, 20)
 oled.text('DATA', 45, 35)
@@ -77,7 +76,6 @@ def sensor_bme():                       # funcion for the sensor BME280 temperat
         i = i + 1
 
 
-
 def sensor_presence():
 
     i = 1
@@ -90,7 +88,6 @@ def sensor_presence():
                                                 # and pass the value into the presence object
         print('Motion detection :', presence)   # just for control purposes on console
         i = i + 1
-
 
 
 def data_display():
@@ -114,17 +111,16 @@ def data_display():
         i = i + 1
 
 
-
 def control_light():
 
     global service_light
 
     if presence == 1:
-        pin25.on()                          # set pin25 high level if presence is detected high level
-        timer = Timer(0)                    # Uses timer 0 for callback function light_status
+        pin_led.on()                         # set pin32 high level if presence is detected high level
+        timer = Timer(0)                     # Uses timer 0 for callback function light_status
         ## sets off delay for light 30 seconds when presence is not detected
         timer.init(period=30000, mode=Timer.ONE_SHOT, callback=lambda t:light_status())
-        service_light = 'ON'                # it updates the object service_light for the OLED display
+        service_light = 'ON'                 # it updates the object service_light for the OLED display
         print('Light is ON')
 
     elif presence == 0:
@@ -132,12 +128,11 @@ def control_light():
         print('Ligth is OFF')
 
 
-
 def light_status():
 
-    global service_light        # after 30s this function is called back and sets in low state the pin25.
+    global service_light        # after 30s this function is called back and sets in low state the pin32.
 
-    pin25.off()                 # Turn off the light
+    pin_led.off()                 # Turn off the light
     service_light = 'OFF'
     print('Ligth is OFF')
 
@@ -171,7 +166,6 @@ def fan_service():
 
     else:
         print('FAN is OFF')
-
 
 
 def fan_status():
