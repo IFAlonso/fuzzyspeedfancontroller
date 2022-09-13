@@ -3,15 +3,14 @@
 ## File fuzzylogic.py
 ## Script version 4.0 - 5/08/2022
 ## Created by Ivan Fernandez Alonso
-## Electronics Engineering
 
 
 ## 1. FUZZIFICATION PROCESS
 
 ## find_temp function finds the value for 'y' (fuzzy inputs) depending on the 'x' value given for different membership functions
-## functions find_temp and find_hum will find the value for 'y2' belong to the slope equation m=(y2-y1)/(x2-x1)
-## rearranging for y2, then y2 = m(x2 - x1) + y1
-## The respective membership functions for temperature and humidity
+## code functions find_temp and find_hum will find the value for 'y2', based on y2 = m(x2 - x1) + y1
+## where 'm' is the slope which was previously calculated for the different membership functions
+
 
 ## The temperature is defined as:
 ## Low temperature – less than 19.75 ºC but more than 18 ºC
@@ -30,7 +29,7 @@
 def find_temp(temp):
     global low_temp, mid_temp, high_temp, very_high_temp
 
-## finds the value for the slope of low temperature and middle temperature between 18 and 21.5
+## finds the value of low temperature and middle temperature between 18 and 21.5
 
     if temp >= 18 and temp < 21.5:
         low_temp = round(-0.2857 * (temp - 18) + 1, 2)  # y2 = m(x2 - x1) + y1, number of digits
@@ -38,7 +37,7 @@ def find_temp(temp):
         high_temp = 0
         very_high_temp = 0
 
-## finds the value for the slope of middle and high temperature between 21.5 and 25
+## finds the value of middle and high temperature between 21.5 and 25
 
     elif temp >= 21.5 and temp < 25:
         low_temp = 0
@@ -46,7 +45,7 @@ def find_temp(temp):
         high_temp = round(0.2857 * (temp - 21.5) + 0, 2)
         very_high_temp = 0
 
-## finds the value for the slope of high and very high temperature between 25 and 28.5
+## finds the value of high and very high temperature between 25 and 28.5
 
     elif temp >= 25 and temp < 28.5:
         low_temp = 0
@@ -63,7 +62,7 @@ def find_temp(temp):
         very_high_temp = 1
 
 
-## this function finds the value of the slopes for the humidity among the different humidity ranges.
+## this function finds the value for the humidity among the different humidity ranges.
 
 def find_hum(hum):
     global very_low_hum, low_hum, mid_hum, high_hum, very_high_hum
