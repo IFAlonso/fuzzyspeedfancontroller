@@ -6,3 +6,10 @@ Features:
 - It has incorporated a digital output (high/low level) to control a light system by means of presence detection.
 
 ![PCB_prototype_frontview1](https://user-images.githubusercontent.com/95512993/189371198-46cae23d-2876-4beb-b871-ca7f631f24d3.jpg)
+
+
+MEMBERSHIP FUNCTIONS
+
+![image](https://user-images.githubusercontent.com/95512993/189966736-2222c179-b586-4f6c-8ce0-85e2768dcc1c.png)
+
+
