@@ -25,7 +25,7 @@ detection = Pin(19, Pin.IN)
 bme = BME280.BME280(i2c=i2c)                      
 pin_led = Pin(32, Pin.OUT)                          
 pwm33 = PWM(Pin(33))                              
-pwm33.freq(10000)                                  
+pwm33.freq(1000)                                  
 pwm33.duty(0)                                      
 
 
